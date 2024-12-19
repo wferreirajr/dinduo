@@ -1,3 +1,6 @@
+COomando para executar o servidor:
+poetry run uvicorn app.main:app --reload 
+
 1. Criar um Usuário (POST)
 curl -X POST http://localhost:8000/api/v1/users \
      -H "Content-Type: application/json" \

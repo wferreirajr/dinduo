@@ -2,29 +2,24 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.api.models.user import User
-from app.core.security import get_password_hash
+from app.core.security import get_password_hash, verify_password
 from pydantic import BaseModel
-from datetime import datetime
 
 router = APIRouter()
 
 class UserCreate(BaseModel):
-    name: str
     email: str
     password: str
 
 class UserUpdate(BaseModel):
-    name: str = None
     email: str = None
     password: str = None
 
 @router.post("/users")
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db_user = User(
-        name=user.name,
         email=user.email,
-        hashed_password=get_password_hash(user.password),
-        created_at=datetime.utcnow()
+        hashed_password=get_password_hash(user.password)
     )
     db.add(db_user)
     db.commit()
