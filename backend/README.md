@@ -31,8 +31,8 @@ DinDuo é uma API que oferece funcionalidades para gerenciamento de usuários, c
 Clone o repositório:
 
 ```bash
-git clone [url-do-repositorio]
-cd backend
+git clone https://github.com/wferreirajr/dinduo
+cd dinduo/backend
 ```
 
 Instale o Poetry (se ainda não tiver):
