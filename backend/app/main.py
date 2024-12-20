@@ -1,8 +1,10 @@
 # Arquivo: main.py
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
+from fastapi.security import OAuth2PasswordBearer
 from app.api.endpoints import user, account
 from app.core.config import settings
 from app.db.database import engine, Base
+from app.core.auth import get_current_user
 
 # Inicialização do banco de dados
 Base.metadata.create_all(bind=engine)
@@ -22,3 +24,8 @@ app.include_router(account.router, prefix=f"{settings.API_V1_STR}/accounts", tag
 @app.get("/")
 async def root():
     return {"message": "Bem-vindo à API"}
+
+# Rota protegida de exemplo
+@app.get("/protected")
+async def protected_route(current_user: dict = Depends(get_current_user)):
+    return {"message": f"Olá, {current_user.name}! Esta é uma rota protegida."}
