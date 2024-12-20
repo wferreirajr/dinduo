@@ -153,6 +153,135 @@ Mantenha o código formatado:
 poetry run black .
 ```
 
+## Sequência de Inicialização
+
+1. **main.py** - Ponto de entrada da aplicação
+    - Inicializa a aplicação FastAPI
+    - Configura as rotas principais
+    - Cria as tabelas do banco de dados
+    - Define configurações globais da API
+
+2. **core/config.py** - Carregado durante a inicialização
+    - Define configurações globais
+    - Carrega variáveis de ambiente
+    - Estabelece constantes do sistema
+
+## Detalhamento dos Diretórios e Arquivos
+
+### 1. /app/core/
+**config.py**
+```python
+# Configurações globais da aplicação
+# Variáveis de ambiente
+# Configurações de segurança (SECRET_KEY, ALGORITHM)
+# URLs base e versão da API
+```
+
+**auth.py**
+```python
+# Gerenciamento de autenticação
+# Funções para criar e validar tokens JWT
+# Dependências de autenticação
+# Verificação de usuários
+```
+
+**security.py**
+```python
+# Funções de segurança
+# Hash de senhas
+# Verificação de senhas
+# Funções auxiliares de segurança
+```
+
+### 2. /app/db/
+**database.py**
+```python
+# Configuração do banco de dados
+# Conexão com SQLAlchemy
+# Sessão do banco de dados
+# Base para modelos ORM
+```
+
+### 3. /app/api/models/
+**user.py, account.py, card.py, category.py, expense.py**
+```python
+# Modelos SQLAlchemy
+# Definição das tabelas do banco de dados
+# Relacionamentos entre tabelas
+# Estrutura dos dados
+```
+
+### 4. /app/api/endpoints/
+**user.py**
+```python
+# Rotas relacionadas a usuários
+# CRUD de usuários
+# Autenticação
+# Gerenciamento de perfil
+```
+
+**account.py**
+```python
+# Rotas relacionadas a contas
+# CRUD de contas
+# Operações financeiras
+# Gerenciamento de saldo
+```
+
+### 5. /tests/
+**test_user.py**
+```python
+# Testes automatizados
+# Testes de endpoints
+# Testes de autenticação
+# Verificações de CRUD
+```
+
+## Fluxo de Execução
+
+1. **Inicialização**
+```python
+# main.py carrega as configurações
+# Configura o banco de dados (database.py)
+# Inicializa os modelos (models/*.py)
+# Registra as rotas (endpoints/*.py)
+```
+
+2. **Requisição**
+```python
+# Cliente faz requisição
+# Middleware de autenticação (auth.py)
+# Rota específica (endpoints/*.py)
+# Interação com banco de dados (models/*.py)
+# Resposta ao cliente
+```
+
+## Arquivos de Configuração
+
+**pyproject.toml**
+- Dependências do projeto
+- Configurações do Poetry
+- Metadados do projeto
+
+**conftest.py**
+- Configurações globais de teste
+- Fixtures do pytest
+- Configurações de ambiente de teste
+
+**create-db-tables.sql**
+- Scripts SQL para criação inicial do banco
+- Estrutura base do banco de dados
+
+## Arquivos de Inicialização
+
+**__init__.py**
+- Tornam os diretórios módulos Python
+- Podem conter inicializações específicas
+- Facilitam importações
+
+Esta estrutura segue o padrão de uma aplicação FastAPI moderna, com separação clara de responsabilidades e organização modular.
+
+
 ## Contribuindo
 
 1. Fork o projeto
