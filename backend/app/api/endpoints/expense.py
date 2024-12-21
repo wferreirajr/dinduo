@@ -4,7 +4,7 @@ Módulo de Endpoints de Despesa
 Este módulo contém todas as rotas relacionadas às operações de despesa,
 incluindo CRUD e gerenciamento de despesas.
 
-Autor: [Seu Nome]
+Autor: Wilson Ferreira Junior
 Data: 20 de Dezembro de 2024
 """
 

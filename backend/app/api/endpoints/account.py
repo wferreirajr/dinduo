@@ -4,7 +4,7 @@ Módulo de Endpoints de Conta
 Este módulo contém todas as rotas relacionadas às operações de conta,
 incluindo CRUD e gerenciamento de contas.
 
-Autor: [Seu Nome]
+Autor: Wilson Ferreira Junior
 Data: 20 de Dezembro de 2024
 """
 

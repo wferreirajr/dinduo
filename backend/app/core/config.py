@@ -4,7 +4,7 @@ Módulo de Configuração
 Este módulo gerencia todas as configurações para a aplicação FastAPI,
 incluindo conexões de banco de dados, configurações JWT e versionamento da API.
 
-Autor: [Seu Nome]
+Autor: Wilson Ferreira Junior
 Data: [Data Atual]
 """
 
