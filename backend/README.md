@@ -296,10 +296,10 @@ Este projeto está sob a licença MIT.
 
 ## Contato
 
-Nome...........: Wilson Ferreira Junior
-E-mail.........: wilson.f.jr@gmail.com
-Link do projeto: https://github.com/wferreirajr/dinduo
-Nota...........: Nunca compartilhe chaves secretas ou credenciais no código fonte ou no README.
+Nome: Wilson Ferreira Junior  
+E-mail: wilson.f.jr@gmail.com  
+Link do projeto: [https://github.com/wferreirajr/dinduo](https://github.com/wferreirajr/dinduo)  
+Nota: Nunca compartilhe chaves secretas ou credenciais no código fonte ou no README.
 
 ## Reconhecimentos
 
