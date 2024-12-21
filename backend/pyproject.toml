@@ -5,6 +5,13 @@ description = ""
 authors = ["Wilson Ferreira Junior <wilson.f.jr@gmail.com>"]
 readme = "README.md"
 
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore::DeprecationWarning:pydantic.*:",
+    "ignore::DeprecationWarning:passlib.*:",
+    "ignore::DeprecationWarning:jose.*:",
+]
+
 [tool.poetry.dependencies]
 python = "^3.12"
 fastapi = "^0.115.6"
