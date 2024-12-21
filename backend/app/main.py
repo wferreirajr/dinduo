@@ -10,7 +10,7 @@ Date: December 20, 2024
 
 from fastapi import FastAPI, Depends
 from fastapi.security import OAuth2PasswordBearer
-from app.api.endpoints import user, account
+from app.api.endpoints import user, account, card, category, expense
 from app.core.config import settings
 from app.db.database import engine, Base
 from app.core.auth import get_current_user
@@ -44,6 +44,21 @@ def create_application() -> FastAPI:
         account.router,
         prefix=f"{settings.API_V1_STR}/accounts",
         tags=["accounts"],
+    )
+    app.include_router(
+        card.router,
+        prefix=f"{settings.API_V1_STR}/cards",
+        tags=["cards"],
+    )
+    app.include_router(
+        category.router,
+        prefix=f"{settings.API_V1_STR}/categories",
+        tags=["categories"],
+    )
+    app.include_router(
+        expense.router,
+        prefix=f"{settings.API_V1_STR}/expenses",
+        tags=["expenses"],
     )
 
     return app
