@@ -104,3 +104,11 @@ def test_delete_expense(authorized_client, test_expense):
     
     get_response = authorized_client.get(f"/api/v1/expenses/{test_expense['id']}")
     assert get_response.status_code == 404
+
+def test_get_expense_summary(authorized_client, test_expense):
+    response = authorized_client.get("/api/v1/expenses/summary")
+    assert response.status_code == 200
+    data = response.json()
+    assert "total_amount" in data
+    assert "expense_count" in data
+    assert "category_summary" in data

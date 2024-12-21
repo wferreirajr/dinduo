@@ -52,6 +52,51 @@ class ExpenseOut(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
+@router.get("/summary", response_model=dict)
+def get_expense_summary(
+    start_date: date = None,
+    end_date: date = None,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+) -> dict:
+    query = db.query(Expense).filter(Expense.user_id == current_user.id)
+    
+    if start_date:
+        query = query.filter(Expense.date >= start_date)
+    if end_date:
+        query = query.filter(Expense.date <= end_date)
+    
+    expenses = query.all()
+    
+    total_amount = sum(expense.amount for expense in expenses)
+    expense_count = len(expenses)
+    
+    category_summary = {}
+    detailed_expenses = []
+    
+    for expense in expenses:
+        category = expense.category.category_name
+        if category not in category_summary:
+            category_summary[category] = 0
+        category_summary[category] += expense.amount
+        
+        detailed_expenses.append({
+            "id": expense.id,
+            "amount": str(expense.amount),
+            "date": expense.date.isoformat(),
+            "description": expense.description,
+            "category": category,
+            "account_name": expense.account.account_name if expense.account else None,
+            "card_name": expense.card.card_name if expense.card else None
+        })
+    
+    return {
+        "total_amount": str(total_amount),
+        "expense_count": expense_count,
+        "category_summary": {cat: str(amount) for cat, amount in category_summary.items()},
+        "detailed_expenses": detailed_expenses
+    }
+
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=ExpenseOut)
 def create_expense(
     expense: ExpenseCreate,
