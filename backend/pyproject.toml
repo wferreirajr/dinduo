@@ -25,6 +25,7 @@ passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 python-multipart = "^0.0.20"
 pydantic-settings = "^2.7.0"
 pytest-ordering = "^0.6"
+fastapi-cors = "^0.0.6"
 
 [tool.poetry.scripts]
 start = "uvicorn app.main:app --reload"

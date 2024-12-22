@@ -21,7 +21,6 @@ from datetime import datetime, timezone
 
 router = APIRouter()
 
-
 class UserCreate(BaseModel):
     """Modelo para criação de usuário."""
     name: str
@@ -55,7 +54,6 @@ class UserOut(BaseModel):
     
     model_config = ConfigDict(from_attributes=True)
 
-
 @router.post("/token", response_model=Token)
 def login_for_access_token(
     form_data: OAuth2PasswordRequestForm = Depends(),
@@ -84,7 +82,6 @@ def login_for_access_token(
     access_token = create_access_token(data={"sub": user.email})
     return {"access_token": access_token, "token_type": "bearer"}
 
-
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=UserOut)
 def create_user(user: UserCreate, db: Session = Depends(get_db)) -> UserOut:
     """
@@ -107,7 +104,6 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)) -> UserOut:
     db.commit()
     db.refresh(db_user)
     return db_user
-
 
 @router.get("/", response_model=list[UserOut])
 def read_users(

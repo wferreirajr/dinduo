@@ -9,6 +9,7 @@ Date: December 20, 2024
 """
 
 from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 from app.api.endpoints import user, account, card, category, expense
 from app.core.config import settings
@@ -32,6 +33,15 @@ def create_application() -> FastAPI:
         title=settings.PROJECT_NAME,
         description="API para gerenciamento de usuários e contas",
         version="1.0.0",
+    )
+
+    # Configuração do CORS
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],  # Endereço do seu frontend Next.js
+        allow_credentials=True,
+        allow_methods=["*"],  # Permite todos os métodos
+        allow_headers=["*"],  # Permite todos os cabeçalhos
     )
 
     # Register routers with their respective prefixes and tags
@@ -63,13 +73,11 @@ def create_application() -> FastAPI:
 
     return app
 
-
 # Initialize database
 init_database()
 
 # Create FastAPI application instance
 app = create_application()
-
 
 @app.get("/")
 async def root() -> dict:
