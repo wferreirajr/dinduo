@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [token, setToken] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -15,17 +17,20 @@ export default function LoginPage() {
     setToken('');
 
     try {
-      const response = await fetch('http://localhost/api/v1/users/token', {
+      const response = await fetch('http://localhost:8000/api/v1/users/token', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify({ username, password }),
+        body: new URLSearchParams({ username, password }),
       });
 
       if (response.ok) {
         const data = await response.json();
         setToken(data.token);
+        // Armazena o token no sessionStorage
+        sessionStorage.setItem('authToken', data.token);
+        router.push('/');
       } else {
         setError('Falha na autenticação. Verifique suas credenciais.');
       }
