@@ -11,7 +11,7 @@ Date: December 20, 2024
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
-from app.api.endpoints import user, account, card, category, expense
+from app.api.endpoints import user, account, card, category, expense, auth
 from app.core.config import settings
 from app.db.database import engine, Base
 from app.core.auth import get_current_user
@@ -69,6 +69,11 @@ def create_application() -> FastAPI:
         expense.router,
         prefix=f"{settings.API_V1_STR}/expenses",
         tags=["expenses"],
+    )
+    app.include_router(
+        auth.router,
+        prefix=f"{settings.API_V1_STR}/auth",
+        tags=["authentication"],
     )
 
     return app
