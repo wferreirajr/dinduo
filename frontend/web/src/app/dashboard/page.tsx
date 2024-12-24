@@ -1,47 +1,45 @@
-import Sidebar from './components/Sidebar';
-import Header from './components/Header';
-import DashboardCard from './components/DashboardCard';
+'use client'
 
-const DashboardPage = () => {
-  const userName = 'Marli'; // Substitua por lógica de autenticação real
+import { useState } from 'react';
+import Header from './Header';
+import Sidebar from './Sidebar';
+import Footer from './Footer';
+import { FaWallet, FaCreditCard, FaTags, FaChartBar, FaTachometerAlt } from 'react-icons/fa';
+
+export default function Dashboard() {
+  const [activeMenu, setActiveMenu] = useState('Dashboard');
+
+  const menuItems = [
+    { name: 'Dashboard', icon: FaTachometerAlt },
+    { name: 'Conta', icon: FaWallet },
+    { name: 'Cartão', icon: FaCreditCard },
+    { name: 'Categoria', icon: FaTags },
+    { name: 'Despesa', icon: FaChartBar },
+  ];
 
   return (
-    <div className="flex h-screen bg-gray-100">
-      <Sidebar />
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <Header userName={userName} />
-        <main className="flex-1 overflow-x-hidden overflow-y-auto p-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <DashboardCard
-              title="Total de Contas"
-              value="5"
-              icon="wallet"
-              color="bg-blue-100"
-            />
-            <DashboardCard
-              title="Cartões Ativos"
-              value="3"
-              icon="credit-card"
-              color="bg-green-100"
-            />
-            <DashboardCard
-              title="Categorias"
-              value="8"
-              icon="tags"
-              color="bg-yellow-100"
-            />
-            <DashboardCard
-              title="Despesas Mensais"
-              value="R$ 2.500,00"
-              icon="chart-line"
-              color="bg-red-100"
-            />
+    <div className="min-h-screen flex flex-col bg-gray-100">
+      <Header />
+
+      <div className="flex flex-grow">
+        <Sidebar menuItems={menuItems} activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
+
+        <main className="flex-grow p-6">
+          <h2 className="text-2xl font-semibold mb-6">{activeMenu}</h2>
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <p className="text-gray-600">
+              Conteúdo do {activeMenu} será exibido aqui.
+            </p>
+            <p className="mt-4 text-sm text-gray-500">
+              Controle financeiro é a prática de registrar, analisar e planejar o fluxo de receitas e despesas da casa, 
+              periódica e permanentemente, e de adquirir hábitos de consumo mais conscientes, garantindo o equilíbrio 
+              entre necessidades e desejos, e entre o presente e o futuro.
+            </p>
           </div>
-          {/* Adicione mais conteúdo do dashboard aqui */}
         </main>
       </div>
+
+      <Footer />
     </div>
   );
-};
-
-export default DashboardPage;
+}
