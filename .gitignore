@@ -26,6 +26,8 @@ wheels/
 env/
 venv/
 ENV/
+pip-wheel-metadata/
+pip-log.txt
 
 # IDE
 .idea/
@@ -38,10 +40,13 @@ ENV/
 *.sqlite
 *.sqlite3
 *.db
+*.db-journal
 
 # Logs
 *.log
 logs/
+*.out
+*.err
 
 # Coverage reports
 htmlcov/
@@ -73,3 +78,38 @@ poetry.lock
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Docker
+docker-compose.override.yml
+*.env.docker
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.rej
+
+# Python Bytecode
+*.pyo
+*.pyd
+
+# Test artifacts
+*.pytest_cache/
+test-results/
+
+# Editor backups
+*~ 
+*.bak
+
+# System files
+Thumbs.db
+desktop.ini
